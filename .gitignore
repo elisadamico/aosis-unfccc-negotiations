@@ -1,0 +1,7 @@
+# Raw source data is not redistributed. Download it from SWISSUbase (see README).
+data/raw/*
+!data/raw/.gitkeep
+.Rproj.user/
+.Rhistory
+.RData
+.DS_Store

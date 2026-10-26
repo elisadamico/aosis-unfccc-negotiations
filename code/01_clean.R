@@ -330,6 +330,25 @@ write_csv(aosis_sentences,    file.path(clean_dir, "aosis_sentences.csv"), na = 
 write_csv(aosis_interactions, file.path(clean_dir, "aosis_interactions.csv"), na = "")
 write_lines(aosis_members,    file.path(clean_dir, "aosis_members.txt"))
 
+# Excel copies of the same files, with a frozen, filterable header row
+write_excel <- function(df, name) {
+  wb <- openxlsx::createWorkbook()
+  openxlsx::addWorksheet(wb, "data")
+  openxlsx::writeData(wb, "data", df, withFilter = TRUE)
+  openxlsx::freezePane(wb, "data", firstRow = TRUE)
+  openxlsx::setColWidths(wb, "data", cols = seq_along(df), widths = 14)
+  if ("sentence" %in% names(df)) {
+    openxlsx::setColWidths(wb, "data", cols = which(names(df) == "sentence"), widths = 80)
+  }
+  openxlsx::saveWorkbook(wb, file.path(clean_dir, paste0(name, ".xlsx")), overwrite = TRUE)
+}
+
+write_excel(meetings,           "meetings")
+write_excel(panel,              "panel_meeting_actor")
+write_excel(aosis_sentences,    "aosis_sentences")
+write_excel(aosis_interactions, "aosis_interactions")
+write_excel(tibble(aosis_member = aosis_members), "aosis_members")
+
 message("Done. Meetings: ", nrow(meetings),
         " | panel rows: ", nrow(panel),
         " | AOSIS sentences: ", nrow(aosis_sentences),

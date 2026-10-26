@@ -58,7 +58,10 @@ see the data works. They are a starting point, not findings.
 
 ## The files you will use
 
-All in `data/clean/`. Variables are explained in [`codebook.md`](codebook.md).
+All in `data/clean/`, each as both an Excel file (`.xlsx`, easiest to open) and
+a `.csv` with the same content. Variables are explained in
+[`codebook.md`](codebook.md). The Excel files have a frozen header row with
+filters, so you can sort and filter by meeting, actor or topic straight away.
 
 | File | One row is | Use it for |
 |---|---|---|
